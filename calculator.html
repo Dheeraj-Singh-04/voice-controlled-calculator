@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="calculator.css" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="main">
+      <input type="text" id="display" readonly />
+      <div class="button-container">
+        <button
+          onclick="currentDisplay=''
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          C
+        </button>
+        <button
+          onclick="currentDisplay+='1'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          1
+        </button>
+        <button
+          onclick="currentDisplay+='2'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          2
+        </button>
+        <button
+          onclick="currentDisplay+='+'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          +
+        </button>
+        <button
+          onclick="currentDisplay+='3'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          3
+        </button>
+        <button
+          onclick="currentDisplay+='4'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          4
+        </button>
+        <button
+          onclick="currentDisplay+='-'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          -
+        </button>
+        <button
+          onclick="currentDisplay+='5'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          5
+        </button>
+        <button
+          onclick="currentDisplay+='6'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          6
+        </button>
+        <button
+          onclick="currentDisplay+='*'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          *
+        </button>
+        <button
+          onclick="currentDisplay+='7'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          7
+        </button>
+        <button
+          onclick="currentDisplay+='8'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          8
+        </button>
+        <button
+          onclick="currentDisplay+='/'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          /
+        </button>
+
+        <!-- getting result using eval() method -->
+        <button
+          onclick="
+        currentDisplay=eval(currentDisplay);
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          =
+        </button>
+        <button
+          onclick="currentDisplay+='9'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          9
+        </button>
+        <button
+          onclick="currentDisplay+='0'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          0
+        </button>
+        <button
+          onclick="currentDisplay+='.'
+        document.querySelector('#display').value = currentDisplay;
+        "
+        >
+          .
+        </button>
+      </div>
+    </div>
+
+    <button
+      id="speak"
+      onclick="voice();
+          // document.querySelector('#display').value = transcript;
+    
+    "
+    >
+      Click to speak
+    </button>
+
+    <script>
+      let currentDisplay = "";
+      document.querySelector("#display").value = currentDisplay;
+
+      function voice() {
+        // creation of object
+        let recognition = new (window.SpeechRecognition ||
+          window.webkitSpeechRecognition)();
+        recognition.onresult = function (event) {
+          let transcript = event.results[0][0].transcript;
+
+          // replace words with math symbols
+          transcript = transcript
+            .replace(/plus|add|adddition|edition/g, "+")
+            .replace(/minus|subtract|subtraction/g, "-")
+            .replace(/multiply\times|into|x/, "*")
+            .replace(/divide|divided by|division/g, "/")
+            .replace(/modulus|mod|rmainder/g, "%")
+            .replace(/point|dot/g, ".");
+
+          document.querySelector("#display").value = transcript;
+          currentDisplay = transcript;
+          console.log(transcript);
+        };
+        recognition.start();
+      }
+    </script>
+  </body>
+</html>
